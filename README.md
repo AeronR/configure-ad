@@ -159,3 +159,24 @@ Since we are unable to ping DC-1, we will open up the firewall to allow ICMP tra
 <h3>Install Active Directory</h3>
 
 <sub>***Active Directory is a directory service developed by Microsot thatstores and manages information about users, computers, and resources in a network. It provides a centralized management and authentication, enabling administrators to control access to network resources and enforce security policies. Active Directory simplifies user manageent, imporves network security, and ehances produtivity by allowing seamless access to resources across multiple domains. It plays a vital role in Windows-based networks, providing a scalable and efficient infrasturcture for user authentication, resource organization, and policy enforcement***</sub>
+
+<h4>How to Install Active Directory</h4>
+
+1.) Open DC-1 VM 
+
+2.) Once inside Dc-1 > search bar 'Service Manager'
+
+3.) Select 'Add roles and features' > 'next' on everything until you reach & select 'Active Directory Domain Services'
+
+<p>
+     <img src="https://imgur.com/MZ9dJce.png"
+          </sc>
+     
+<p>
+     <img src="https://imgur.com/NjPMjL8.png"
+          </p>
+ 
+Active Directory has now been installed on DC-1, but we still need to set up an actual domain.
+     
+ 
+     
