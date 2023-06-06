@@ -4,7 +4,7 @@
 </p>
 
 <h1>On-premises Active Directory Deployed in the Cloud (Azure)</h1>
-This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines. I will be demonstrating how I set up virtuaml machines w/ Azure, install Active Directory, and create additional users to simulate the use of Active Directory
+This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines. I will be demonstrating how I set up virtual machines w/ Azure, install Active Directory, and create additional users to simulate the use of Active Directory
 
 <h2>Environments and Technologies Used</h2>
 
