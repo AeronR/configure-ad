@@ -73,14 +73,38 @@ First things first, create a Domain Controller and a Client (Windows VM), then s
   
 <sub>***The client is a computer or device that connects to the domain controller for user authentiation and access to network resources***</sub>
  
-<h4>How to create the Client<h4>
-  
-1.) 'Virtual Machines' > 'create'
+<h4>How to create the Client</h4>
+
+1.) Go to Microsoft Azure again > 'Virtual Machines' > 'create'
   
 2.) VM name = 'Client 1' > Windows 10 Pro > 2vcpus > whatever username and password > 'disks' > 'networking' (Client-1 is automatically put on the same network as DC-1) > Done
-  
+       
 <p>
   <img src="https://imgur.com/dE0Dqsr.png"
        </p>
   
 <p>
+     <img src="https://imgur.com/0DAyw3l.png"
+          </p>
+
+**Setting DC-1 NIC Private IP address to Static**
+     
+***Setting a static IP for a domain controller is crucial for network stability and seamless integration with DNS and Active Directory.A static IP provides consistent network address, ensuring reliable communication with other devices and services. This stability is particularly important for DNS resolution, as a domain controller often serves as DNS servers. Additionally static IP enables efficient management of users accounts and network resources within teh Active Directory infrastrucutre. By maintaining a fixed IP address, the domain controller can reliably handle authentication requests, control access to resources, and enure the integrity of the Active Directory database***
+     
+<h4>How to set DC-1 NIC Private IP to Static</h4>
+
+1.) Azure Portal > 'Virtual Machines > select 'DC-1'
+
+2.) Select 'networking' > 'network interface' 
+
+<p>
+<img src="https://imgur.com/mcpd6JO.png"
+     </p>
+  
+3.) select 'IP configurations' > select the only IPconfig > switch from 'dynamic' to 'static' > 'save'
+     
+<p>
+<img src="https://imgur.com/afFM2md.png"
+</p>
+     
+ <h3>Part 2: Ensure Connectivity between the Client and Domain Controller<h3>
