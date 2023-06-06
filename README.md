@@ -107,4 +107,51 @@ First things first, create a Domain Controller and a Client (Windows VM), then s
 <img src="https://imgur.com/afFM2md.png"
 </p>
      
- <h3>Part 2: Ensure Connectivity between the Client and Domain Controller<h3>
+ <h3>Part 2: Ensure Connectivity between the Client and Domain Controller</h3>
+      
+First thing I am going to do is remotely log into the Client-1 VM to test out the connectivity between Client-1 and DC-1 by using the ping command on the command prompt. But first, I would need to locate the private IP address of DC-1 so that I can ping it. The private IP address will be located in the Azure Website under DC-1 VM.
+      
+<p>
+     <img src="https://imgur.com/nwMLToT.png"
+          </p>
+     
+<p>
+     <img src="https://imgur.com/JTT7CML.png"
+          </p>
+
+As you can see when we tried to ping the private IP address of DC-1, the request timed out.
+     This could be multiple reasons, but for this scenario it is becaue DC-1's firewall is preventing ICMP traffic from coming through.
+     
+***Firewalls sometimes block ICMP traffic for security reasons. ICMP is a protocol used for diagnostic and control purposes, including ping requests and error messages.Blocking ICMP can prevent potential network attacks, such as ICMP flood attacks or smurf attacks, where an attacking floods the network with ICMP packets to overwhelm it. By blocking ICMP, firewalls can help protect the network from certain types of threats and limit potential vulnerabiities***
+     
+Since we are unable to ping DC-1, we will open up the firewall to allow ICMP traffic. 
+     
+<h4>How to alter Firewall Settings</h4>
+
+1.) Remote desktop into DC-1
+
+2.) Once logged into DC-1, type 'firewall' on the serach bar.
+
+<p>
+     <img src="https://imgur.com/TDcGiuc.png"
+          </p>
+  
+3.) Select 'Inbound Rules' and filter by "Protocol' since we are looking for ICMPv4
+     
+ <p>
+      <img src="https://imgur.com/FJHeTyU.png"
+           </p>
+      
+4.) Enable Core Networking Diagnostics: ICMP Echo Request (ICMPv4-In)
+      
+5.) Right click the two inbound rules > select 'enable rule'
+ 
+ <p>
+      <img src="https://imgur.com/HE2omAJ.png"
+           </p>
+      
+6.) Return to Client VM-1, and you will see the that the pings are now going through!
+      
+<p>
+     <img src="https://imgur.com/CwUMDqO.png"
+          </p>
