@@ -158,4 +158,4 @@ Since we are unable to ping DC-1, we will open up the firewall to allow ICMP tra
   
 <h3>Install Active Directory</h3>
 
-<sub>***Active Directory is a directory service developed by Microsot thatstores and manages information about users, computers, and resources in a network. It provides a centralized management and authentication, enalabing administrators
+<sub>***Active Directory is a directory service developed by Microsot thatstores and manages information about users, computers, and resources in a network. It provides a centralized management and authentication, enabling administrators to control access to network resources and enforce security policies. Active Directory simplifies user manageent, imporves network security, and ehances produtivity by allowing seamless access to resources across multiple domains. It plays a vital role in Windows-based networks, providing a scalable and efficient infrasturcture for user authentication, resource organization, and policy enforcement***</sub>
