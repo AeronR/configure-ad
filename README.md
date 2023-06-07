@@ -271,7 +271,7 @@ We must first set Client-1's DNS settings to the domain controllers private IP a
 
 Now, we are going to set it up so all domain users can remote log into Client-1 because as of right now only admins can do this.
      
-<h4How to Set Up Remote Desktop for Non-Admins<h4>
+<h4>How to Set Up Remote Desktop for Non-Admins:<h4>
      
 1.) Inside Client-1 VM, right-click Windows start icon > click 'System'
      
@@ -290,7 +290,7 @@ Now, we are going to set it up so all domain users can remote log into Client-1 
  Now that we have set it up for that regular users can access Client-1, we will be testing it out.
       First, we will create random user accounts and attempt to log into Client-1 to ensure that it is working properly. 
       
-      <h4>How to Create Additional Users</h4>
+<h4>How to Create Additional Users</h4>
       
 1.) Log into DC-1 VM as the admin > in the search bar type "Powershell ISE" and run as admin
       
@@ -311,8 +311,7 @@ Now, we are going to set it up so all domain users can remote log into Client-1 
 <p>
      <img src="https://imgur.com/30IGNOI.png"
           </p>
-     
-Finished!
+
      
  
       
