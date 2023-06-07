@@ -4,7 +4,7 @@
 </p>
 
 <h1>On-premises Active Directory Deployed in the Cloud (Azure)</h1>
-This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines. I will be demonstrating how I set up virtual machines w/ Azure, install Active Directory, and create additional users to simulate the use of Active Directory
+This tutorial outlines the implementation of on-premises Active Directory within Azure Virtual Machines. 
 
 <h2>Environments and Technologies Used</h2>
 
@@ -178,5 +178,157 @@ Since we are unable to ping DC-1, we will open up the firewall to allow ICMP tra
  
 Active Directory has now been installed on DC-1, but we still need to set up an actual domain.
      
+<h4>How to promote DC-1 VM to be an actual Domain Controller</h4>
+
+1.) Open DC-1 VM > open 'Service Manager' > select the notifactions flag (top right)
+
+<p>
+     <img src="https://imgur.com/aJe0Q3b.png"
+          </p>
+   
+2.) Select 'Promote this server to be a domain controller' > select 'Add new forest' > enter domain name > selct 'next > enter a password > 'next' > 'install'
+     
+<p>
+     <img src="https://imgur.com/IPyUDBk.png"
+          </p>
+     
+<p>
+     <img src="https://imgur.com/w404TUZ.png"
+          </p>
+     
+<h3>Part 4: Create Admin and Normal User Accouns on AD</h3>
+
+1.) Open DC-1 VM > open 'Active Directory Users and Computers' via search bar.
+
+2.) Right-click 'mydomain.com' > 'new' > 'Organizational Unit' > create 2 units, one for employees and another for adimins.
+
+<p>
+     <img src="https://imgur.com/ImVZVLD.png"
+          </p>
+     
+<h4>How to create Users/Admins & Assigning Role of Admin</h4>
+
+1.) Open the organizational unit for Admins > 'New' > 'Users' > enter username and password of choice.
+
+<p>
+     <img src="https://imgur.com/XS0S7u5.png"
+          </p>
+     
+<p>
+     <img src="https://imgur.com/53MAyVh.png"
+          </p>
+   
+***Once the admin user has been created, we will give them the role of 'Admin'. Adding a user into a organizational unit will not grant them admin authority yet, so now we will give them the official role***
+     
+ 2.) Right-click the admin's name > 'Properties' > 'Member Of' > Add > type 'Domain Admins' > Apply > OK
+
+<p>
+     <img src="https://imgur.com/GkEm1EK.png"
+          </p>
+     
+<p>
+     <img src="https://imgur.com/OKMp8fW.png"
+          </p>
+     
+Now that we have created an Admin, we can log out of the Domain Controller and relog back into the DC-1 VM as the admin user.
+     
+     
+<h3>Part 5: Join Client-1 to your domain (mydomain.com)</h3>
+
+Now we will connect Client-1 to the domain so that Client-1 can retrieve/connect to user information stored in DC-1.
+
+We must first set Client-1's DNS settings to the domain controllers private IP address. This is to ensure that the client can communicatewith the domain controller for things like logging on, accessing shared files, printers, etc. 
+
+<h4>How to set Client-1 DNS settings</h4>
+
+1.) Azure Portal > 'Virtual Machines' > DC-1 VM > copy the private IP address 
+
+<p>
+     <img src="https://imgur.com/sEqkeeq.png"
+          </p>
+     
+2.) Go to Client-1 VM > Networking > Network Interface
+     
+<p>
+     <img src="https://imgur.com/CyZ9cyu.png"
+          </p>
+     
+3.) Select 'DNS servers' > 'Custom > paste DC-1's private IP address > save 
+     
+<p>
+     <img src="https://imgur.com/QKzQVBm.png"
+          </p>
+    
+***Client-1's DNS settings have now been change. We just have to flush the local DNS cache and restart Client-1 now***
+     
+4.) Go to Client-1 VM overview > click 'Restart' to flush DNS cache
+     
+<p>
+     <img src="https://imgur.com/ToTTOlS.png"
+          </p>
+     
+<h3>Part 6: Setup Remote Desktop for non-admin users on Client-1</h3>
+
+Now, we are going to set it up so all domain users can remote log into Client-1 because as of right now only admins can do this.
+     
+<h4How to Set Up Remote Desktop for Non-Admins<h4>
+     
+1.) Inside Client-1 VM, right-click Windows start icon > click 'System'
+     
+<p>
+     <img src="https://imgur.com/WZ51z6R.png"
+          </p>
+     
+2.) Select 'Remote Desktop' > 'Select Users that can remotely access PC' > 'Add' > 'Domain Users' > 'OK' > Now non-admins can now log in. 
+     
+<p>
+     <img src="https://imgur.com/gTqiUK9.png"
+          </p>
+     
+ <h3>Part 7: Create additional users and attempt to log into Client-1 w/ one of the users<h4>
+      
+ Now that we have set it up for that regular users can access Client-1, we will be testing it out.
+      First, we will create random user accounts and attempt to log into Client-1 to ensure that it is working properly. 
+      
+      <h4>How to Create Additional Users</h4>
+      
+1.) Log into DC-1 VM as the admin > in the search bar type "Powershell ISE" and run as admin
+      
+2.) Create a new file > Copy and paste the script from this link into Powershell and it will start creating multiple accounts: https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1
+      
+<p>
+     <img src="https://imgur.com/MvZttfM.png"
+          </p>
+   
+3.) Go back to DC-1 VM > Open Active Directory > under the 'Employees' Organizational Unit you will see all the users created by the script we implemented.
+     
+<p>
+     <img src="https://imgur.com/fM1HeV2.png"
+          </p>
+     
+4.) Log into any of the users created by the script to make sure it works.
+     
+<p>
+     <img src="https://imgur.com/30IGNOI.png"
+          </p>
+     
+Finished!
+     
+ 
+      
+   
+      
+      
+      
+      
+      
+   
+      
+     
+
+  
+
+     
+        
  
      
